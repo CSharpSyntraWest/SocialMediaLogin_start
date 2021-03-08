@@ -60,22 +60,6 @@ namespace IdentityByExamples
 
             services.AddScoped<IUserClaimsPrincipalFactory<User>, CustomClaimsFactory>();
 
-            services.AddAuthentication()
-                .AddGoogle("google", opt =>
-                {
-                    var googleAuth = Configuration.GetSection("Authentication:Google");
-
-                    opt.ClientId = googleAuth["ClientId"];
-                    opt.ClientSecret = googleAuth["ClientSecret"];
-                    opt.SignInScheme = IdentityConstants.ExternalScheme;
-                });
-            //https://console.cloud.google.com/apis/credentials/oauthclient/648171943614-671n1c6j20ktru584s97rps3m2i7iuqd.apps.googleusercontent.com?folder=&organizationId=&project=pittig
-            services.AddAuthentication().AddFacebook(facebookOptions =>
-            {
-                facebookOptions.AppId = "1946441992156084";
-                facebookOptions.AppSecret = "f0842a223fa175e0facf548ddfa8c29a";
-            });
-            //https://developers.facebook.com/apps/1946441992156084/settings/basic/
             services.AddAutoMapper(typeof(Startup));
 
             var emailConfig = Configuration
